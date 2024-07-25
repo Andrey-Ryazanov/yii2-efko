@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+
+    php-fpm:
+        image: ${REGISTRY}/${PROJECT}-php-fpm:${IMAGE_TAG}
+        environment:
+            ENV: ${ENV}
+        volumes:
+            - ./:/var/www/html
+
+    php-cli:
+        image: ${REGISTRY}/${PROJECT}-php-cli:${IMAGE_TAG}
+        environment:
+            ENV: ${ENV}
+        volumes:
+            - ./:/app
+
+    nginx:
+        image: ${REGISTRY}/${PROJECT}-nginx:${IMAGE_TAG}
+        ports:
+            - ${APP_WEB_PORT}:80
+        volumes:
+            - ./:/var/www/html
